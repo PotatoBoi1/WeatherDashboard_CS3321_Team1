@@ -1,14 +1,44 @@
-body {
-  background-color: lightblue;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+div {
+  border: 0.5px dashed yellow;
+}
+header {
+  height: 10vh;
 }
 
-h1 {
-  color: black;
-  text-align: center;
+.main-content {
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  position: fixed;
+  bottom: 0%;
 }
 
-p {
-  font-family: verdana;
-  font-size: 20px;
+.left-body {
+  width: 40vw;
+  min-width: 300px;
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+}
+.right-body {
+  width: 60vw;
+}
+
+.input-city-field {
+  margin: 15px 0;
+}
+#city-input {
+  border-radius: 5px;
+  border-color: #0d6efd;
+  height: 37px;
+  background-color: #343434;
+  color: white;
+  padding-bottom: 5px;
+}
+
+#city-input-button {
+  width: auto;
+}
+
+.weather-carousel {
+  height: 100%;
 }
