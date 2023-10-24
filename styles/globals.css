@@ -1,0 +1,23 @@
+
+
+.main-content {
+  width: 100vw;
+  height: 100vh;
+  background-color: #343434;
+  color: #F7F7F9;
+}
+
+.top-main-content {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+#city-input {
+  border-radius: 5px;
+  border-color: #0d6efd;
+  height: 37px;
+  background-color: #343434;
+  color: white;
+  padding-bottom: 5px;
+}
