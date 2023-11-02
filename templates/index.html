@@ -24,11 +24,19 @@
         <div class="main-content">
             <div class="left-body child-main-content">
                 <div class="input-city-field">
-                    <input id="city-input" type="text" placeholder="Enter City Here" />
-                    <button id="city-input-button" type="button" class="btn btn-primary">Get Weather</button>
+                  <form action="weatherRequest" method="post">
+                    <input name="city" id="city-input" type="text" placeholder="Enter City Name" />
+                    <input name="state-code" id="longitude-input" type="text" placeholder="Enter State Name" />
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </form>
                 </div>
                 <div class="city-history">
-                    <p>History will go here</p>
+                    <p>
+                      Location: {{Weather.city}}, {{Weather.state}}<br>
+                      Temperature: {{Weather.currentTemp}} Fahrenheit<br>
+                      Wind: {{Weather.currentWind}} mph<br>
+                      Precipitation: {{Weather.precipitation}} inches
+                    </p>
                 </div>
             </div>
             <div class="right-body child-main-content">
