@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const WeatherCard = ({
     city,
-    temp,
+    currentTemp,
     deleteWeatherCard
 }) => {
     const [image, setImage] = useState('')
@@ -28,7 +28,7 @@ const WeatherCard = ({
             <div className="temp" 
                 style={{display:'flex', justifyContent:'center', fontSize:'30px'}}
             >
-                <p>{temp}°F</p>
+                <p>{currentTemp}°F</p>
             </div>
             <div className="city"
                 style={{display:'flex', justifyContent:'center', fontSize:'30px'}}
