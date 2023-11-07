@@ -7,6 +7,7 @@ import axios from "axios";
 const WeatherModal = () => {
     const [city, setCity] = useState('');
     const [weatherCards, setWeatherCards] = useState([]);
+    const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
     const handleWeatherButtonClick = async () => {
         if (city === '') {
@@ -42,29 +43,56 @@ const WeatherModal = () => {
         // delete index from list
     }
 
+    const handleCardChange = (direction) => {
+        const tempIndex = currentCardIndex + direction;
+        if (weatherCards[tempIndex]) {
+            setCurrentCardIndex(tempIndex)
+        } else {
+            toast.error('No Cards that way', {style: {borderRadius: '10px', background:'#0b5ed7', color:'white'}, position: "bottom-center"});
+        }
+    };
+
     return (
         <div className="main-content">
-            <div className="top-main-content">
-                <CityInput 
-                    setCity={setCity}
-                    handleWeatherButtonClick={handleWeatherButtonClick}
-                />
-            </div>
-            <div className="bottom-main-content" 
-                style={{display:'flex', justifyContent:'center', width:'auto'}} 
-            >
-                {weatherCards.length > 0 && /* Only show if weatherCards has content */
-                    weatherCards.map((indiv, index) =>  /* Indiv is a object with weather data, index is an integer*/
-                        (<WeatherCard 
-                            key={index} // You should provide a unique key for each element
+          <div className="top-main-content">
+            <CityInput
+              setCity={setCity}
+              handleWeatherButtonClick={handleWeatherButtonClick}
+            />
+          </div>
+          <div className="bottom-main-content" style={{ display: 'flex', justifyContent: 'center', width: 'auto' }}>
+            {weatherCards.length > 0 && (
+              <section style={{ display: 'inline-flex' }}>
+                <div className="prev-arrow" style={{ display: 'flex', alignItems: 'center', paddingRight: '50px', fontSize: '40px' }}>
+                  <div onClick={() => handleCardChange(-1)} style={{ color: '#bcb8b1', cursor: 'pointer' }}>
+                    &lt;
+                  </div>
+                </div>
+                {
+                    weatherCards.map((indiv, index) => {
+                    if (currentCardIndex === index) {
+                        return (
+                        <WeatherCard
+                            key={index}
                             currentTemp={indiv.currentTemp}
                             city={indiv.city}
-                            deleteWeatherCard={handleDelete(index)}
+                            deleteWeatherCard={() => handleDelete(index)}
                         />
-                    ))}
-            </div>
+                        );
+                    }
+                    return null; // Return null for other cards that should be hidden
+                    })
+                }
+                <div className="next-arrow" style={{ display: 'flex', alignItems: 'center', paddingLeft: '50px', fontSize: '40px' }}>
+                  <div onClick={() => handleCardChange(1)} style={{ color: '#bcb8b1', cursor: 'pointer' }}>
+                    &gt;
+                  </div>
+                </div>
+              </section>
+            )}
+          </div>
         </div>
-    );
+      );
 };
 
 export default WeatherModal;
