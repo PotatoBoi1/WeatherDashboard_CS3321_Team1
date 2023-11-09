@@ -37,6 +37,7 @@ const WeatherModal = () => {
         // Spread in new weathercard to array
         setWeatherCards([...weatherCards, card])
         setCity("");
+        setCurrentCardIndex(weatherCards.length);
     };
 
 
