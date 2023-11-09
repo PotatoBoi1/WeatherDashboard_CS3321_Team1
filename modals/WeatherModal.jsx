@@ -11,9 +11,9 @@ const WeatherModal = () => {
 
     const handleWeatherButtonClick = async () => {
         if (city === '') {
-            toast.error('Please enter a city.', {style: {borderRadius: '10px', background:'#0b5ed7', color:'white'}, position: "bottom-center"});
-            return;
-        }
+          toast.error('Please enter a city.', {style: {borderRadius: '10px', background:'#0b5ed7', color:'white'}, position: "bottom-center"});
+          return;
+        };
 
         const cityToPass = {
             city: city,
@@ -36,6 +36,8 @@ const WeatherModal = () => {
 
         // Spread in new weathercard to array
         setWeatherCards([...weatherCards, card])
+        setCity("");
+        setCurrentCardIndex(weatherCards.length);
     };
 
 
@@ -56,6 +58,7 @@ const WeatherModal = () => {
         <div className="main-content">
           <div className="top-main-content">
             <CityInput
+              city={city}
               setCity={setCity}
               handleWeatherButtonClick={handleWeatherButtonClick}
             />
