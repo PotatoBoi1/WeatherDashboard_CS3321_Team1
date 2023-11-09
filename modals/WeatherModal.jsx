@@ -29,7 +29,7 @@ const WeatherModal = () => {
             body: JSON.stringify(cityToPass)
         })
         const data = await response.json()
-
+        console.log(data);
         const card = {
             ...data,
         };
@@ -76,6 +76,7 @@ const WeatherModal = () => {
                             key={index}
                             currentTemp={indiv.currentTemp}
                             city={indiv.city}
+                            code={indiv.weatherCode}
                             deleteWeatherCard={() => handleDelete(index)}
                         />
                         );

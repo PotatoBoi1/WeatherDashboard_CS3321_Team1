@@ -3,14 +3,19 @@ import React, { useState } from "react";
 const WeatherCard = ({
     city,
     currentTemp,
-    deleteWeatherCard
+    deleteWeatherCard,
+    code
 }) => {
     const [image, setImage] = useState('')
 
     React.useEffect(() => {
-        // Get weather icon
-        // TODO: add check for what image to use
-        setImage('/animated/cloudy-day-1.svg');
+        if (code == 0) {
+            setImage("/animated/day.svg");
+        }
+        else if (code == 1) {
+            setImage("/animated/cloudy-day-3.svg");
+        }
+
     }, []);
 
     return (
