@@ -17,6 +17,7 @@ const CityInput = (props) => {
                     id="city-input" 
                     placeholder="Enter City Here"
                     onChange={handleCityChange}
+                    value={props.city}
                 />
             </div>
             <div>
