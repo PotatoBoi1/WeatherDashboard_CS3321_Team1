@@ -19,9 +19,9 @@ def weather_request():
     result1 = result1.json()
     latitude = result1[0]['lat']
     longitude = result1[0]['lon']
-    result = requests.get("https://api.open-meteo.com/v1/forecast?latitude="+str(latitude)+"&longitude="+str(longitude)+"&current=temperature_2m,precipitation,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch")
+    result = requests.get("https://api.open-meteo.com/v1/forecast?latitude="+str(latitude)+"&longitude="+str(longitude)+"&current=temperature_2m,precipitation,weather_code,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch")
     response = result.json()
-    returnDict = {'city': result1[0]['name'], 'state': result1[0]['state'], 'currentTemp': response['current']['temperature_2m'], 'currentWind': response['current']['windspeed_10m'], 'precipitation': response['current']['precipitation']}
+    returnDict = {'weatherCode': response['current']['weather_code'], 'city': result1[0]['name'], 'state': result1[0]['state'], 'currentTemp': response['current']['temperature_2m'], 'currentWind': response['current']['wind_speed_10m'], 'precipitation': response['current']['precipitation']}
     #response = "Temperature: " + str(response['current']['temperature_2m']) + " Fahrenheit<br>Windspeed: " + str(response['current']['windspeed_10m']) + " mph"
     return json.dumps(returnDict)
 
