@@ -15,9 +15,17 @@ const WeatherModal = () => {
           return;
         };
 
+        // split into city and state
+        if (city.indexOf(',') === -1) {
+          toast.error("Invalid Format. Please Enter 'City, State'", {style: {borderRadius: '10px', background:'#0b5ed7', color:'white'}, position: "bottom-center"})
+          return;
+        }
+        const state = (city.split(',')[1]).trim();
+        const parsedCity = (city.split(',')[0]).trim();
+
         const cityToPass = {
-            city: city,
-            stateCode: 'ID'
+            city: parsedCity,
+            stateCode: state
         };
 
         const response = await fetch("/api/weatherRequest", {
@@ -29,7 +37,7 @@ const WeatherModal = () => {
             body: JSON.stringify(cityToPass)
         })
         const data = await response.json()
-        console.log(data);
+
         const card = {
             ...data,
         };
