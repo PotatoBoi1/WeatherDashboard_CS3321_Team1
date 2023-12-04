@@ -37,7 +37,9 @@ const WeatherModal = () => {
             body: JSON.stringify(cityToPass)
     	})
         const data = await response.json()
-
+		if (!data) {
+			console.log('error');
+		}
         const card = {
             ...data,
         };
@@ -91,42 +93,51 @@ const WeatherModal = () => {
 		  </div>
 		  <div className="bottom-main-content" style={{ display: 'flex', justifyContent: 'center', width: 'auto' }}>
 			{weatherCards.length > 0 && (
-			  <section style={{ display: 'inline-flex', alignItems: 'center' }}>
-				<div className="prev-arrow" style={{ paddingRight: '50px', fontSize: '40px' }}>
-				  <div onClick={() => handleCardChange(-1)} style={{ color: '#bcb8b1', cursor: 'pointer' }}>
+			  <section style={{ display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+				<div className="prev-arrow" style={{fontSize: '40px', position:'absolute', left:'0', paddingLeft:'100px', zIndex:'1' }}>
+				  <div
+					onClick={() => handleCardChange(-1)}
+					style={{ color: '#bcb8b1', cursor: 'pointer' }}
+				  >
 					&lt;
 				  </div>
 				</div>
 				{weatherCards.map((indiv, index) => {
 				  const isCurrentCard = currentCardIndex === index;
 				  const isInRange = index >= currentCardIndex - 1 && index <= currentCardIndex + 1;
-				  const cardStyle = {
-					opacity: isCurrentCard ? 1 : 0.3,
-					transition: 'opacity 0.3s ease',
-					flex: '0 0 auto',
-					marginLeft: isCurrentCard ? 'auto' : index < currentCardIndex ? '20px' : '0',
-					marginRight: isCurrentCard ? 'auto' : index > currentCardIndex ? '10px' : '0',
-				  };
-				if (isInRange) {
-				  return (
-					<div key={index} style={cardStyle}>
-					  <WeatherCard
-						currentTemp={indiv.currentTemp}
-						city={indiv.city}
-						state={indiv.state}
-						wind={indiv.currentWind}
-						precipitation={indiv.precipitation}
-						code={indiv.weatherCode}
-						deleteWeatherCard={() => handleDelete(index)}
-					  />
-					</div>
-				  );
-				} else {
+	  
+				  if (isInRange) {
+					const cardStyle = {
+					  opacity: isCurrentCard ? 1 : 0.2,
+					  transition: 'opacity 0.8s ease, transform 0.8s ease',
+					  flex: '0 0 auto',
+					  marginLeft: isCurrentCard ? 'auto' : index < currentCardIndex ? '10px' : '5px', // Adjusted marginLeft
+					  marginRight: isCurrentCard ? 'auto' : index > currentCardIndex ? '5px' : '10px', // Adjusted marginRight
+					  transform: isCurrentCard ? 'translateX(0)' : index < currentCardIndex ? 'translateX(-40px)' : 'translateX(40px)',
+					};
+	  
+					return (
+					  <div key={index} style={cardStyle}>
+						<WeatherCard
+						  currentTemp={indiv.currentTemp}
+						  city={indiv.city}
+						  state={indiv.state}
+						  wind={indiv.currentWind}
+						  precipitation={indiv.precipitation}
+						  code={indiv.weatherCode}
+						  deleteWeatherCard={() => handleDelete(index)}
+						/>
+					  </div>
+					);
+				  } else {
 					return null;
-				}
+				  }
 				})}
-				<div className="next-arrow" style={{ paddingLeft: '50px', fontSize: '40px' }}>
-				  <div onClick={() => handleCardChange(1)} style={{ color: '#bcb8b1', cursor: 'pointer' }}>
+				<div className="next-arrow" style={{fontSize: '40px', position:'absolute', right:'0', paddingRight:'100px', zIndex:'1' }}>
+				  <div
+					onClick={() => handleCardChange(1)}
+					style={{ color: '#bcb8b1', cursor: 'pointer' }}
+				  >
 					&gt;
 				  </div>
 				</div>
@@ -135,7 +146,7 @@ const WeatherModal = () => {
 		  </div>
 		</div>
 	  );
-	  
+				  
 };
 
 export default WeatherModal;

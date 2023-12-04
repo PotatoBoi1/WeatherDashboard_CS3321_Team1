@@ -42,7 +42,7 @@ const WeatherCard = ({
 
     return (
         <div className="weather-card" 
-            style={{display:'flex',border:'2px solid #bcb8b1', boxShadow: '10px 5px 10px #bcb8b1', borderRadius:'10px', 
+            style={{display:'flex',border:'2px solid #bcb8b1', boxShadow: '1px 1px 10px #bcb8b1', borderRadius:'15% 0px', 
                     width:'325px', height:'550px', alignContent:'center', 
                     marginTop:'30px', flexDirection:'column'
                 }}
