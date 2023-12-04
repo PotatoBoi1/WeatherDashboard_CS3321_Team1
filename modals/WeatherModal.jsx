@@ -43,10 +43,15 @@ const WeatherModal = () => {
         const card = {
             ...data,
         };
-        // Spread in new weathercard to array
-        setWeatherCards([...weatherCards, card])
-        setCity("");
-        setCurrentCardIndex(weatherCards.length);
+		if (card.city) {
+			// Spread in new weathercard to array
+			setWeatherCards([...weatherCards, card])
+			setCity("");
+			setCurrentCardIndex(weatherCards.length);
+		} else {
+			toast.error("Please enter a valid city.", {style: {borderRadius: '10px', background:'#0b5ed7', color:'white'}, position: "bottom-center"})
+		}
+
     };
 
 
