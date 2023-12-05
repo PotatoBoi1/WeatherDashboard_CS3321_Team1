@@ -7,7 +7,12 @@ const CityInput = (props) => {
         props.setCity(event.target.value);
     }
 
-
+    const handleKeyPress = (event) => {
+        // only run if enter was pressed
+        if (event.key === 'Enter') {
+            props.handleWeatherButtonClick();
+        }
+    }
 
     return (
         <div className="main-city-input" style={mainStyles}>
@@ -17,6 +22,7 @@ const CityInput = (props) => {
                     id="city-input" 
                     placeholder="Enter City Here"
                     onChange={handleCityChange}
+                    onKeyDown={handleKeyPress}
                     value={props.city}
                 />
             </div>
